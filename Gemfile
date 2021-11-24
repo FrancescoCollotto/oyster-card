@@ -10,3 +10,7 @@ group :development, :test do
   gem "rspec"
 end
 
+
+gem "simplecov", "~> 0.21.2"
+
+gem "simplecov-console", "~> 0.9.1"

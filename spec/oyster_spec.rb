@@ -1,3 +1,4 @@
+require 'journey'
 require 'oyster'
 
 describe Oyster do
@@ -21,19 +22,12 @@ describe Oyster do
     expect{ card.top_up(Oyster::LIMIT + 1) }.to raise_error "This top up would exceed your £#{Oyster::LIMIT} card limit."
   end
 
-  it "set in_use to be true when touch in" do
-    card.top_up(Oyster::MIN_BALANCE)
-    card.touch_in(station)
-    expect(card).to be_in_journey
-  end
-
-  it "set in_use to be false when touch out" do
-    card.top_up(Oyster::MIN_BALANCE)
-    card.touch_in(station)
-    card.touch_out(station_b)
-    expect(card).not_to be_in_journey
-  end
-
+  # it "set in_use to be false when touch out" do
+  #   card.top_up(Oyster::MIN_BALANCE)
+  #   card.touch_in(station)
+  #   card.touch_out(station_b)
+  #   expect(card).not_to be_in_journey
+  # end
   it "in_journey return true when touch in" do
     card.top_up(Oyster::MIN_BALANCE)
     card.touch_in(station)
@@ -53,19 +47,8 @@ describe Oyster do
 
   it "deducts the mimimum fare after touch_out" do
     card.top_up(Oyster::MIN_BALANCE)
-    card.touch_in(station)
-    expect { card.touch_out(station_b) }.to change{card.balance}.by(-Oyster::MIN_BALANCE)
-  end
-
-  it "update @entry_station when touch in" do
-    card.top_up(Oyster::MIN_BALANCE)
-    expect { card.touch_in(station) }.to change { card.entry_station }.from(nil).to(station)
-  end
-
-  it "update @entry_station to nil when touch out" do
-    card.top_up(Oyster::MIN_BALANCE)
-    card.touch_in(station)
-    expect { card.touch_out(station_b) }.to change { card.entry_station }.from(station).to(nil)
+    card.touch_in(station) 
+    expect { card.touch_out(station_b) }.to change{card.balance}.by(- Journey::FARE)
   end
 
   it "card has an empty list of journeys by default" do
@@ -79,25 +62,21 @@ describe Oyster do
     expect(card.journeys.count).to eq 1
   end
 
-  it "accurately records the journey entry and exit station" do
+  it "create a new Journey when touch in" do
+    card.top_up(Oyster::MIN_BALANCE)
+    expect(card.touch_in(station)).to be_an_instance_of Journey
+  end
+
+  it "deduct a penalty fare when touch in twice" do
     card.top_up(Oyster::MIN_BALANCE)
     card.touch_in(station)
-    card.touch_out(station_b)
-    expect(card.journeys.last).to eq({entry: station, exit: station_b})
+    expect { card.touch_in(station_b) }.to change{ card.balance }.by(- Journey::PENALTY_FARE)
+  end
+
+  it "deduct a penalty fare when touch out when not touch in" do
+    expect { card.touch_out(station_b) }.to change{ card.balance }.by(- Journey::PENALTY_FARE)
   end
 end
-
-# card.top(5)
-# card.touch_in(streatham)
-# => @entry_station = "streatham"
-# =>  @journeys.push({entry: streatham})
-# card.touch_out(aldgate)
-# => @journeys.last[:exit] = algate
-
-
-
-#  @journeys = [{hash}]
-# {entry: "streatham", exit: "aldgate"}
 
 
 

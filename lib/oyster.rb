@@ -1,8 +1,6 @@
 # require_relative 'journey'
 
 class Oyster
-  # FARE = 1
-  # PENALTY_FARE = 6
   LIMIT = 90
   MIN_BALANCE = 1
   attr_reader :balance
@@ -11,9 +9,8 @@ class Oyster
 
   def initialize
     @balance = 0
-    @entry_station = nil # remove
     @journeys = []
-    # @current_journey = nil
+    @current_journey = nil
   end
 
   def exceed_limit?(amount)
@@ -31,45 +28,38 @@ class Oyster
 
   def touch_in(station)
     raise "You have less than the £#{MIN_BALANCE} minimum balance, please top up." unless enough_balance?
-    @entry_station = station
-    @journeys.push({ entry: station })
-    # if !in_journey?
-      #@current_journey = Journey.new(entry_station)
-    # else
-      # deduct(PENALTY_FARE)
-      # current_journey.exit_station(nil)
-      # @journeys << current_journey
-      # current_journey = Journey.new(entry_station)
+    if !in_journey?
+      @current_journey = Journey.new(station)
+    else
+      deduct(@current_journey.fare)
+      @journeys << @current_journey
+      @current_journey = Journey.new(station)
+    end
   end
 
   def touch_out(station)
-    # if in_journey?
-    deduct(MIN_BALANCE)
-      # deduct(FARE)
-      # current_journey.exit_station(station)
-      # current_journey.completed
-      # @journeys << current_journey
-      # current_journey = nil 
-    # else
-      # current_journey = Journey.new(nil)
-      # deduct(PENALTY_FARE)
-      # current_journey.exit_station(station)
-      # @journeys << current_journey
-      # current_journey = nil 
-    @entry_station = nil
-    @journeys.last[:exit] = station
+    if in_journey?
+      @current_journey.exit_station=(station)
+      deduct(@current_journey.fare)
+      @journeys << @current_journey
+      @current_journey = nil 
+    else
+      @current_journey = Journey.new(nil)
+      @current_journey.exit_station=(station)
+      deduct(@current_journey.fare)
+      @journeys << @current_journey
+      @current_journey = nil 
+    end
   end
 
   def in_journey?
-    # @current_journey ? true : false
-    @entry_station ? true : false
+    !!@current_journey
   end
   
   private 
 
   def deduct(fare)
-    @balance -= fare
-    # @current_journey.set_fare(fare)
+    @balance -= @current_journey.fare
   end
 
 end
