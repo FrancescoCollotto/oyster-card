@@ -1,21 +1,11 @@
 require 'journey_log'
 
 describe JourneyLog do
+  let(:journey) { Journey }
+  let(:subject) { JourneyLog.new(journey_class: journey) }
+
+
   
-  it "starts a journey" do
-    
-
-  end
-
-  it "ends a journey" do
-    
-  end
-
-  it "lists journeys" do
-    
-    
-  end
-
   it "expects in_journey to be true when travelling" do
     subject.start("Victoria")
     expect(subject.in_journey?).to eq true

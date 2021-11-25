@@ -3,7 +3,7 @@ require_relative 'journey'
 class JourneyLog 
   attr_reader :current_journey
 
-  def initialize(journey_class = Journey) 
+  def initialize(journey_class:) 
     @journey_class = journey_class
     @journeys = []
     @current_journey = nil
@@ -40,7 +40,7 @@ class JourneyLog
   end
 
   def journeys
-    @journeys
+    @journeys.dup
   end
 
   private

@@ -55,7 +55,6 @@ describe Oyster do
     card.touch_out(station)
     expect(card.list_journeys.count).to eq 1
   end
-
 end
 
 
