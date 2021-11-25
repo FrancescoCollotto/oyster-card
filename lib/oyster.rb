@@ -6,11 +6,10 @@ class Oyster
   MIN_BALANCE = 1
   attr_reader :balance
   attr_reader :entry_station
-  attr_reader :journeys
 
-  def initialize
+  def initialize( journey_log = JourneyLog)
     @balance = 0
-    @journey_log = JourneyLog.new(journey_class: Journey.new("Victoria")) #check here
+    @journey_log = journey_log.new
   end
 
   def exceed_limit?(amount)
@@ -28,32 +27,18 @@ class Oyster
 
   def touch_in(station)
     raise "You have less than the £#{MIN_BALANCE} minimum balance, please top up." unless enough_balance?
-    @journey_log.start(Journey.new(station))
-
+    deduct(@journey_log.current_journey.fare) if @journey_log.in_journey?
+    @journey_log.start(station)
   end
 
   def touch_out(station)
-    # amount = journey_log.end(station)
-    # deduct(amount)
-
-    if in_journey?
-      @current_journey.exit_station=(station)
-      deduct(@current_journey.fare)
-      @journeys << @current_journey
-      @current_journey = nil 
-    else
-      @current_journey = Journey.new(nil)
-      @current_journey.exit_station=(station)
-      deduct(@current_journey.fare)
-      @journeys << @current_journey
-      @current_journey = nil 
-    end
+    deduct(@journey_log.end(station))
   end
   
   private 
 
   def deduct(fare)
-    @balance -= @current_journey.fare
+    @balance -= fare
   end
 
 end

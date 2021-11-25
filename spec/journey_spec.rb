@@ -1,10 +1,10 @@
 require 'journey'
 
 describe Journey do
-  let(:journey) { Journey.new("Bank")}
+  let(:journey) { Journey.new}
 
   it "has the proper attributes" do
-    expect(journey).to have_attributes(:entry_station => "Bank", :exit_station => nil)
+    expect(journey).to have_attributes(:entry_station => nil, :exit_station => nil)
   end
 
   it "can set a new entry_station" do
@@ -22,6 +22,7 @@ describe Journey do
   end
 
   it "return true when journey complete" do
+    journey.entry_station=("Victoria")
     journey.exit_station=("Moorgate")
     expect(journey.completed).to eq true
   end
@@ -29,4 +30,5 @@ describe Journey do
   it "return penalty fare if journey not complete" do
     expect(journey.fare).to eq Journey::PENALTY_FARE
   end
+
 end

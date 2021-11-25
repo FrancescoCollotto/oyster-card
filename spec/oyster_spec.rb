@@ -28,18 +28,8 @@ describe Oyster do
   #   card.touch_out(station_b)
   #   expect(card).not_to be_in_journey
   # end
-  it "in_journey return true when touch in" do
-    card.top_up(Oyster::MIN_BALANCE)
-    card.touch_in(station)
-    expect(card.in_journey?).to eq true
-  end
 
-  it "in_journey return false when touch_in and touch_out" do
-    card.top_up(Oyster::MIN_BALANCE)
-    card.touch_in(station)
-    card.touch_out(station_b)
-    expect(card.in_journey?).to eq false
-  end
+
 
   it "does not allow user to touch in if card is under the minimum balance" do
     expect { card.touch_in(station) }.to raise_error "You have less than the £#{Oyster::MIN_BALANCE} minimum balance, please top up."
@@ -49,22 +39,6 @@ describe Oyster do
     card.top_up(Oyster::MIN_BALANCE)
     card.touch_in(station) 
     expect { card.touch_out(station_b) }.to change{card.balance}.by(- Journey::FARE)
-  end
-
-  it "card has an empty list of journeys by default" do
-    expect(card.journeys.empty?).to eq true
-  end
-
-  it "creates a journey after touch_in and touch_out" do
-    card.top_up(Oyster::MIN_BALANCE)
-    card.touch_in(station)
-    card.touch_out(station_b)
-    expect(card.journeys.count).to eq 1
-  end
-
-  it "create a new Journey when touch in" do
-    card.top_up(Oyster::MIN_BALANCE)
-    expect(card.touch_in(station)).to be_an_instance_of Journey
   end
 
   it "deduct a penalty fare when touch in twice" do
