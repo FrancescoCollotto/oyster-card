@@ -2,7 +2,7 @@ require 'journey'
 require 'oyster'
 
 describe Oyster do
-  let(:card) { described_class.new }
+  let(:card) { described_class.new(journey_log: JourneyLog.new(journey_class: Journey)) }
   let(:station) { double('station') }
   let(:station_b) { double('station_b') }
 

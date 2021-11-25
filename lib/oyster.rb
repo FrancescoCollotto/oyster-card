@@ -7,9 +7,9 @@ class Oyster
   attr_reader :balance
   attr_reader :entry_station
 
-  def initialize
+  def initialize(journey_log: JourneyLog.new(Journey))
     @balance = 0
-    @journey_log = JourneyLog.new(journey_class: Journey)
+    @journey_log = journey_log
   end
 
   def exceed_limit?(amount)
