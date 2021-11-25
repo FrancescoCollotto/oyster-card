@@ -1,7 +1,6 @@
 
 class Journey
   PENALTY_FARE = 6
-  FARE = 1
   attr_reader :entry_station, :exit_station
 
   def initialize
@@ -23,8 +22,14 @@ class Journey
   end
 
   def fare
-    return FARE unless !@entry_station || !@exit_station
+    return calculate_fare unless !@entry_station || !@exit_station
     PENALTY_FARE
+  end
+
+  private
+
+  def calculate_fare
+    (@entry_station.zone - @exit_station.zone).abs + 1 
   end
 
 end

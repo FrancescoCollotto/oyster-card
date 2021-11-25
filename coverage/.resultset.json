@@ -1,13 +1,18 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/alfonsoghislieri/Coding/Makers/Week2/Oyster-Cards2/oyster-card/spec/journey_log_spec.rb": {
+      "/Users/francesco/Makers/week2/oyster-card/spec/journey_log_spec.rb": {
         "lines": [
           1,
           null,
           1,
           6,
           6,
+          null,
+          1,
+          5,
+          5,
+          null,
           null,
           1,
           1,
@@ -35,7 +40,7 @@
           null
         ]
       },
-      "/Users/alfonsoghislieri/Coding/Makers/Week2/Oyster-Cards2/oyster-card/lib/journey_log.rb": {
+      "/Users/francesco/Makers/week2/oyster-card/lib/journey_log.rb": {
         "lines": [
           1,
           null,
@@ -92,25 +97,24 @@
           null
         ]
       },
-      "/Users/alfonsoghislieri/Coding/Makers/Week2/Oyster-Cards2/oyster-card/lib/journey.rb": {
+      "/Users/francesco/Makers/week2/oyster-card/lib/journey.rb": {
         "lines": [
           null,
           1,
           1,
           1,
-          1,
           null,
           1,
-          14,
-          14,
+          17,
+          17,
+          null,
+          null,
+          1,
+          12,
           null,
           null,
           1,
           9,
-          null,
-          null,
-          1,
-          6,
           null,
           null,
           1,
@@ -119,8 +123,14 @@
           null,
           null,
           1,
-          6,
+          9,
           3,
+          null,
+          null,
+          1,
+          null,
+          1,
+          6,
           null,
           null,
           null,
@@ -128,12 +138,14 @@
           null
         ]
       },
-      "/Users/alfonsoghislieri/Coding/Makers/Week2/Oyster-Cards2/oyster-card/spec/journey_spec.rb": {
+      "/Users/francesco/Makers/week2/oyster-card/spec/journey_spec.rb": {
         "lines": [
           1,
           null,
           1,
-          7,
+          10,
+          4,
+          4,
           null,
           1,
           1,
@@ -162,11 +174,34 @@
           1,
           1,
           null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null
         ]
       },
-      "/Users/alfonsoghislieri/Coding/Makers/Week2/Oyster-Cards2/oyster-card/spec/oyster_spec.rb": {
+      "/Users/francesco/Makers/week2/oyster-card/spec/oyster_spec.rb": {
         "lines": [
           1,
           1,
@@ -174,7 +209,7 @@
           1,
           10,
           5,
-          4,
+          5,
           null,
           1,
           1,
@@ -206,19 +241,24 @@
           1,
           1,
           1,
-          4,
-          null,
-          null,
-          1,
           1,
           1,
           4,
           null,
           null,
+          null,
+          1,
+          1,
           1,
           4,
           null,
           null,
+          1,
+          4,
+          null,
+          null,
+          1,
+          1,
           1,
           1,
           1,
@@ -232,7 +272,7 @@
           null
         ]
       },
-      "/Users/alfonsoghislieri/Coding/Makers/Week2/Oyster-Cards2/oyster-card/lib/oyster.rb": {
+      "/Users/francesco/Makers/week2/oyster-card/lib/oyster.rb": {
         "lines": [
           1,
           1,
@@ -284,7 +324,7 @@
           null
         ]
       },
-      "/Users/alfonsoghislieri/Coding/Makers/Week2/Oyster-Cards2/oyster-card/spec/station_spec.rb": {
+      "/Users/francesco/Makers/week2/oyster-card/spec/station_spec.rb": {
         "lines": [
           1,
           null,
@@ -296,7 +336,7 @@
           null
         ]
       },
-      "/Users/alfonsoghislieri/Coding/Makers/Week2/Oyster-Cards2/oyster-card/lib/station.rb": {
+      "/Users/francesco/Makers/week2/oyster-card/lib/station.rb": {
         "lines": [
           1,
           1,
@@ -310,6 +350,6 @@
         ]
       }
     },
-    "timestamp": 1637848633
+    "timestamp": 1637850993
   }
 }

@@ -35,9 +35,12 @@ describe Oyster do
 
   it "deducts the mimimum fare after touch_out" do
     card.top_up(Oyster::MIN_BALANCE)
+    allow(station).to receive(:zone).and_return(1)
+    allow(station_b).to receive(:zone).and_return(5)
     card.touch_in(station) 
-    expect { card.touch_out(station_b) }.to change{card.balance}.by(- Journey::FARE)
+    expect { card.touch_out(station_b) }.to change{card.balance}.by(- 5)
   end
+
 
   it "deduct a penalty fare when touch in twice" do
     card.top_up(Oyster::MIN_BALANCE)
@@ -51,8 +54,10 @@ describe Oyster do
 
   it "lists journeys" do
     card.top_up(10)
+    allow(station).to receive(:zone).and_return(1)
+    allow(station_b).to receive(:zone).and_return(5)
     card.touch_in(station)
-    card.touch_out(station)
+    card.touch_out(station_b)
     expect(card.list_journeys.count).to eq 1
   end
 end
