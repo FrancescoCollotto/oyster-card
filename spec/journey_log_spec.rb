@@ -4,8 +4,6 @@ describe JourneyLog do
   let(:journey) { Journey }
   let(:subject) { JourneyLog.new(journey_class: journey) }
 
-
-  
   it "expects in_journey to be true when travelling" do
     subject.start("Victoria")
     expect(subject.in_journey?).to eq true
