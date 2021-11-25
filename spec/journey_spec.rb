@@ -31,4 +31,15 @@ describe Journey do
     expect(journey.fare).to eq Journey::PENALTY_FARE
   end
 
+  it "returns a fare of 5 when travelling from zone 1 to zone 1" do
+    
+  end
+
+  it "returns a fare of 2 when travelling from zone 4 to zone 2" do
+    
+  end
+
+  it "returns a fare of 1 when travelling from zone 6 to 5" do
+    
+  end
 end
