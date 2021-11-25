@@ -1,4 +1,5 @@
-# require_relative 'journey'
+require_relative './journey_log'
+require_relative './journey'
 
 class Oyster
   LIMIT = 90
@@ -9,8 +10,7 @@ class Oyster
 
   def initialize
     @balance = 0
-    @journeys = []
-    @current_journey = nil
+    @journey_log = JourneyLog.new(journey_class: Journey.new("Victoria")) #check here
   end
 
   def exceed_limit?(amount)
@@ -28,16 +28,14 @@ class Oyster
 
   def touch_in(station)
     raise "You have less than the £#{MIN_BALANCE} minimum balance, please top up." unless enough_balance?
-    if !in_journey?
-      @current_journey = Journey.new(station)
-    else
-      deduct(@current_journey.fare)
-      @journeys << @current_journey
-      @current_journey = Journey.new(station)
-    end
+    @journey_log.start(Journey.new(station))
+
   end
 
   def touch_out(station)
+    # amount = journey_log.end(station)
+    # deduct(amount)
+
     if in_journey?
       @current_journey.exit_station=(station)
       deduct(@current_journey.fare)
@@ -50,10 +48,6 @@ class Oyster
       @journeys << @current_journey
       @current_journey = nil 
     end
-  end
-
-  def in_journey?
-    !!@current_journey
   end
   
   private 
