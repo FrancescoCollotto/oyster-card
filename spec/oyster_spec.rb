@@ -29,8 +29,6 @@ describe Oyster do
   #   expect(card).not_to be_in_journey
   # end
 
-
-
   it "does not allow user to touch in if card is under the minimum balance" do
     expect { card.touch_in(station) }.to raise_error "You have less than the £#{Oyster::MIN_BALANCE} minimum balance, please top up."
   end
@@ -50,6 +48,14 @@ describe Oyster do
   it "deduct a penalty fare when touch out when not touch in" do
     expect { card.touch_out(station_b) }.to change{ card.balance }.by(- Journey::PENALTY_FARE)
   end
+
+  it "lists journeys" do
+    card.top_up(10)
+    card.touch_in(station)
+    card.touch_out(station)
+    expect(card.list_journeys.count).to eq 1
+  end
+
 end
 
 

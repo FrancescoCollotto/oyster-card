@@ -34,6 +34,10 @@ class Oyster
   def touch_out(station)
     deduct(@journey_log.end(station))
   end
+
+  def list_journeys
+    @journey_log.journeys
+  end
   
   private 
 
