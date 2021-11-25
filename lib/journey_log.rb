@@ -20,18 +20,10 @@ class JourneyLog
 
   def end(station)
     if in_journey?
-      @current_journey.exit_station=(station)
-      amount = @current_journey.fare
-      @journeys << @current_journey
-      @current_journey = nil
-      amount
+      set_end_journey(station)
     else
       @current_journey = @journey_class.new
-      @current_journey.exit_station=(station)
-      amount = current_journey.fare
-      @journeys << @current_journey
-      @current_journey = nil
-      amount 
+      set_end_journey(station)
     end
   end
 
@@ -48,6 +40,14 @@ class JourneyLog
   def set_new_journey(station)
     @current_journey = @journey_class.new
     @current_journey.entry_station=(station)
+  end
+
+  def set_end_journey(station)
+    @current_journey.exit_station=(station)
+    amount = @current_journey.fare
+    @journeys << @current_journey
+    @current_journey = nil
+    amount
   end
 
 end
